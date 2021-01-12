@@ -47,3 +47,24 @@ if __name__ == '__main__':
             print(res)
 
         # print("memo", memo)
+    import fileinput
+    for line in fileinput.input():
+        print("ori line", line, type(line))
+        input  = line.split(',')
+        input = map(int, input)
+        input = list(input)
+        print("input list", list(input))
+        memo = [None for _ in range(2 ** n + 1)]
+        for i in range(n):
+            print("i", i)
+            memo[2 ** i] = {(input[i], str(input[i]))}
+        res = helper(memo, 15)
+        t = False
+        for r in res:
+            if abs(r[0] - 24) < 1e-5:
+                print("result",input, True, r)
+                t = True
+                break
+        if not t:
+            print("error",input, False)
+            print(res)
