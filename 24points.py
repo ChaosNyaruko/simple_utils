@@ -3,13 +3,14 @@ def fork(a, b):
     res = set()
     for x in a:
         for y in b:
-            res.add(x + y)
-            res.add(x - y)
-            res.add(x * y)
-            if y:
-                res.add(x / y)
-            if x:
-                res.add(y / x)
+            res.add((x[0] + y[0], '(' + x[1] + '+' + y[1] + ')'))
+            res.add((x[0] - y[0],'(' + x[1] +  '-' + y[1] + ')'))
+            res.add((y[0] - x[0],'(' + y[1] + '-' + x[1] + ')'))
+            res.add((x[0] * y[0],'(' + x[1] + '*' + y[1] + ')'))
+            if y[0]:
+                res.add((x[0] / y[0],'(' + x[1] + '/' + y[1] + ')'))
+            if x[0]:
+                res.add((y[0] / x[0],'(' + y[1] + '/' + x[1] + ')'))
     return res
 
 def helper(memo, i):
@@ -33,12 +34,12 @@ if __name__ == '__main__':
         assert n == len(input)
         memo = [None for _ in range(2 ** n + 1)]
         for i in range(n):
-            memo[2 ** i] = {input[i]}
+            memo[2 ** i] = {(input[i], str(input[i]))}
         res = helper(memo, 15)
         t = False
         for r in res:
-            if abs(r - 24) < 1e-5:
-                print(input, True, res)
+            if abs(r[0] - 24) < 1e-5:
+                print(input, True, r)
                 t = True
                 break
         if not t:
