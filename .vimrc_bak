@@ -9,6 +9,10 @@ set nocompatible
 
 " 打开语法高亮
 syntax on
+" 显示和设置空格字符
+set list
+set listchars=space:\ ,tab:>\
+
 " 开启文件类型检查，并且载入与该类型对应的缩进规则
 filetype off " required
 " set the runtime path to include Vundle and initialize
