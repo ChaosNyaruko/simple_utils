@@ -1,6 +1,0 @@
-Bundle 'dracula/vim'
-Bundle 'junegunn/fzf.vim'
-Bundle 'NLKNguyen/papercolor-theme'
-Bundle 'rakr/vim-one'
-" Bundle 'endel/vim-github-colorscheme'
-
