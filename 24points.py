@@ -30,41 +30,67 @@ def helper(memo, i):
 
 if __name__ == '__main__':
     inputs = [[5,5,5,1], [3,3,7,7],[3,3,8,8],[1,4,5,6],[3,8,8,10],[4,4,10,10],[9,9,6,2]]
-    for input in inputs:
-        assert n == len(input)
-        memo = [None for _ in range(2 ** n + 1)]
+    for input_line in inputs:
+        assert n == len(input_line)
+        memo = [[] for _ in range(2 ** n + 1)]
         for i in range(n):
-            memo[2 ** i] = {(input[i], str(input[i]))}
+            memo[2 ** i] = {(input_line[i], str(input_line[i]))}
         res = helper(memo, 15)
         t = False
         for r in res:
             if abs(r[0] - 24) < 1e-5:
-                print(input, True, r)
+                print(input_line, True, r)
                 t = True
                 break
         if not t:
-            print(input, False)
+            print(input_line, False)
             print(res)
 
         # print("memo", memo)
+    while True:
+        try:
+            line = input(f'input a string like "x,y,z,t", without quotes:')
+            print("ori line", line, type(line))
+            input_line  = line.split(',')
+            input_line = map(int, input_line)
+            input_line = list(input_line)
+            print("input list", list(input_line))
+            memo = [None for _ in range(2 ** n + 1)]
+            for i in range(n):
+                print("i", i)
+                memo[2 ** i] = {(input_line[i], str(input_line[i]))}
+            res = helper(memo, 15)
+            t = False
+            for r in res:
+                if abs(r[0] - 24) < 1e-5:
+                    print("result",input_line, True, r)
+                    t = True
+                    break
+            if not t:
+                print("error",input_line, False)
+                print(res)
+
+        except (KeyboardInterrupt, EOFError):
+            print("oh, it's terminated")
+            exit(0)
     import fileinput
-    for line in fileinput.input():
+    for line in fileinput.input("test"):
         print("ori line", line, type(line))
-        input  = line.split(',')
-        input = map(int, input)
-        input = list(input)
-        print("input list", list(input))
+        input_line  = line.split(',')
+        input_line = map(int, input_line)
+        input_line = list(input_line)
+        print("input list", list(input_line))
         memo = [None for _ in range(2 ** n + 1)]
         for i in range(n):
             print("i", i)
-            memo[2 ** i] = {(input[i], str(input[i]))}
+            memo[2 ** i] = {(input_line[i], str(input_line[i]))}
         res = helper(memo, 15)
         t = False
         for r in res:
             if abs(r[0] - 24) < 1e-5:
-                print("result",input, True, r)
+                print("result",input_line, True, r)
                 t = True
                 break
         if not t:
-            print("error",input, False)
+            print("error",input_line, False)
             print(res)
